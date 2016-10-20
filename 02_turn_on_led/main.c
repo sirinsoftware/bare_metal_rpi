@@ -9,6 +9,11 @@
 #define SET_GPIO16_REG         (GPIO_ADDRESS + 0x1C)
 #define CLEAR_GPIO16_REG    (GPIO_ADDRESS + 0x28)
 
+#define SELECT_GPIO47_REG   (GPIO_ADDRESS + 0xC)
+#define SET_GPIO47_REG      (GPIO_ADDRESS + 0x20)
+#define CLEAR_GPIO47_REG    (GPIO_ADDRESS + 0x2C)
+
+
 volatile unsigned int* select_reg = (unsigned int*) SELECT_GPIO16_REG;
 volatile unsigned int* set_reg = (unsigned int*) SET_GPIO16_REG;
 volatile unsigned int* clear_reg = (unsigned int*) CLEAR_GPIO16_REG;

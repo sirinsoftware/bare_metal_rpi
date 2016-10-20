@@ -9,6 +9,10 @@
 #define SET_GPIO16_REG      (GPIO_ADDRESS + 0x1C)
 #define CLEAR_GPIO16_REG    (GPIO_ADDRESS + 0x28)
 
+#define SELECT_GPIO47_REG   (GPIO_ADDRESS + 0xC)
+#define SET_GPIO47_REG      (GPIO_ADDRESS + 0x20)
+#define CLEAR_GPIO47_REG    (GPIO_ADDRESS + 0x2C)
+
 #define ARMTIMER_ADDRESS    (BASE_IO_ADDRESS + 0xB400)
 #define INTERRUPT_CONTROLLER_ADDRESS (BASE_IO_ADDRESS+ 0xB200)
 
@@ -68,6 +72,7 @@ int main(void)
     return 0;
 }
 
+static char on = 1;
 /*
  * interrupt handler
  */
@@ -76,7 +81,6 @@ void __attribute__((interrupt("IRQ"))) interrupt_vector(void)
     // check whether the source is TIMER
     if (interrupt_controller->IRQ_basic_pending & INTERRUPT_CTRL_ARM_TIMER_IRQ)
     {
-        static char on = 1;
         // switch LED
         if (on)
         {

@@ -1,0 +1,24 @@
+CCPREFIX ?= arm-none-eabi
+CC = gcc
+
+CFLAGS = -O0 
+CFLAGS += -mfpu=neon-vfpv4
+CFLAGS += -mfloat-abi=hard 
+CFLAGS += -march=armv7-a 
+CFLAGS += -g 
+CFLAGS += -mtune=cortex-a7
+CFLAGS += -nostartfiles
+
+all: kernel.img
+
+kernel.img: kernel.elf
+	$(CCPREFIX)-objcopy kernel.elf -O binary kernel.img
+
+kernel.elf: main.c
+	$(CCPREFIX)-$(CC) $(CFLAGS) $^ -o $@
+
+dump: kernel.elf
+	$(CCPREFIX)-objdump -D kernel.elf > kernel.dump
+
+clean:
+	rm *.img *.elf
